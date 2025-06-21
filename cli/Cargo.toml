@@ -16,4 +16,4 @@ anyhow = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true, features = ["env-filter"] }
 serde_json = { workspace = true }
-dirs = "5.0"
+dirs = "6.0"
