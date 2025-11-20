@@ -15,6 +15,7 @@ pub struct Object {
     pub space_id: Option<String>,
     pub object: Option<String>, // object type
     pub properties: serde_json::Value,
+    pub markdown: Option<String>,
     // Add more fields as needed
 }
 
@@ -24,6 +25,13 @@ pub struct ListObjectsResponse {
     pub data: Vec<Object>,
     pub pagination: Pagination,
 }
+
+/// Response for getting an object
+#[derive(Debug, Deserialize)]
+pub struct GetObjectResponse {
+    pub object: Object,
+}
+
 
 /// Request to create a new object
 #[derive(Debug, Serialize)]
@@ -77,7 +85,7 @@ impl AnytypeClient {
     }
 
     /// Get a specific object by ID
-    pub async fn get_object(&self, space_id: &str, object_id: &str) -> Result<Object> {
+    pub async fn get_object(&self, space_id: &str, object_id: &str) -> Result<GetObjectResponse> {
         self.get(&format!("/v1/spaces/{space_id}/objects/{object_id}"))
             .await
     }
